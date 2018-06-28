@@ -1,0 +1,380 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Face Detection</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <script src="{{ url_for('static', filename='tracking-min.js') }}"></script>
+  <script src="{{ url_for('static', filename='face-min.js') }}"></script>
+
+  <style>
+      .linke {
+    display: block;
+    width: 115px;
+    height: 25px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+    div.container {
+      width: 100%;
+
+    }
+    h1{
+
+      font-size: 42px;
+    }
+    header {
+      padding: 2em;
+      color: #fffdfe;
+      background-color: #2c3e50;
+      clear: left;
+      text-align: left;
+      text-transform: uppercase;
+      text-shadow: 0 1px 0 #ccc,
+      0 2px 0 #c9c9c9,
+      0 3px 0 #bbb,
+      0 4px 0 #b9b9b9,
+      0 5px 0 #aaa,
+      0 6px 1px rgba(0,0,0,.1),
+      0 0 5px rgba(0,0,0,.1),
+      0 1px 3px rgba(0,0,0,.3),
+      0 3px 5px rgba(0,0,0,.2),
+      0 5px 10px rgba(0,0,0,.25),
+      0 10px 10px rgba(0,0,0,.2),
+      0 20px 20px rgba(0,0,0,.15);
+
+    }
+    footer{
+
+      color: #f9fffd;
+      background-color: #2c3e50;
+
+      text-align: center;
+
+      font-family: "Andale Mono";
+      text-transform: uppercase;
+
+
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+
+
+
+  <style>
+  video, canvas {
+    max-width: 1000px;
+    margin: auto;
+    left: 1%;
+    right: 1%;
+    margin-top: 10px;
+    position: absolute;
+
+  }
+  </style>
+
+  <style>
+    .btn-group button {
+      background-color: #2c3e50; /* Green background */
+      border: 1px solid #f9fffd; /* Green border */
+      color: white; /* White text */
+      padding: 10px 24px; /* Some padding */
+      cursor: pointer; /* Pointer/hand icon */
+      width: 100%; /* Set a width if needed */
+      display: block; /* Make the buttons appear below each other */
+      margin-top: 60%;
+      border-radius: 7px;
+    }
+    .btn-group{
+
+      margin-right: 40px;
+      margin-top: 5%;
+    }
+
+
+    /* Add a background color on hover */
+    .btn-group button:hover {
+      background-color: #ff8e06;
+    }
+
+    .output{
+      border-radius: 10px;
+      height: 250px;
+      border: 2px solid #2c3e50; /* Green border */
+      width: 250px;
+      margin-left: 20px;
+      background: white;
+      margin-top: 10%;
+      float: left;
+
+    }
+  </style>
+
+
+
+
+
+
+
+  <style>
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      position: relative;
+      background-color: #2C3E50;
+      border-radius: 10px;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 50%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-header {
+      padding: 2px 16px;
+      border-radius: 10px;
+      background-color: #8e8f8e;
+      color: white;
+    }
+
+    .modal-body {padding: 2px 16px;}
+
+  </style>
+
+
+<style>
+
+  img{
+    border-radius: 8px;
+    width: 90%;
+    height: 50%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+  img.logo{
+    width: 120px;
+    margin-right: 30px;
+    margin-top: -130px;
+    background: #d5dbd9;
+  }
+</style>
+
+
+
+
+
+</head>
+<body>
+
+  <body bgcolor="#18BC9C">
+
+  <div class="container">
+    <header>
+
+      <h1> <b>Face Detection and Comparison</b> </h1>
+
+    </header>
+
+    <div id="logo">
+      <img class="logo" src="{{ url_for('static', filename='icon.png') }}">
+    </div>
+  </div>
+
+
+
+    <div class="btn-group" style="float: right">
+      <button onclick="document.location.href=this.getAttribute('href');" href="/takeScreenshot">Snapshot</button>
+      <button onclick="document.location.href=this.getAttribute('href');" href="/checkImage">Compare</button>
+      <button id="myBtn">Contact us</button>
+
+    </div>
+
+  <div class="output">
+    <p id="output_compare" align="center" style="font-size: 30px; color: black; font-family: 'Abril Fatface'; font-weight: bold; margin-top: 40px">{{ myResult }}</p>
+      {% if free == "Criminal" %}
+    <p id="output_compare" align="center" style="font-size: 30px; color: red; font-family: 'Abril Fatface'; font-weight: bold; margin-top: 40px">{{ free }}</p>
+        {% else %}
+    <p id="output_compare" align="center" style="font-size: 30px; color: green; font-family: 'Abril Fatface'; font-weight: bold; margin-top: 40px">{{ free }}</p>
+        {% endif %}
+  </div>
+
+
+  <div id="demo-frame "  >
+
+      <video id="video" width="1000" height="500"    preload autoplay loop muted></video>
+      <canvas id="canvas" width="1000" height="500" ></canvas>
+        <canvas id="canvas1" width="1000" height="500" ></canvas>
+  </div>
+
+
+
+
+  <script>
+      function myFunction() {
+          document.getElementById("output_compare").innerHTML = "Criminal";
+      }
+  </script>
+
+  <script>
+      function myFunction1() {
+          confirm("Snapped...");
+      }
+  </script>
+
+
+
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Contact Us</h2>
+      </div>
+      <div class="modal-body">
+        <img src="{{ url_for('static', filename='Contact.png') }}">
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+      // Get the modal
+      var modal = document.getElementById('myModal');
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal
+      btn.onclick = function() {
+          modal.style.display = "block";
+      }
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+  </script>
+
+
+
+
+
+
+
+
+
+    <script>
+   document.getElementById("capture").addEventListener('click', function(){
+   });
+</script>
+
+
+  <script>
+    window.onload = function() {
+      var video = document.getElementById('video');
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+      var tracker = new tracking.ObjectTracker('face');
+      tracker.setInitialScale(4);
+      tracker.setStepSize(2);
+      tracker.setEdgesDensity(0.1);
+      tracking.track('#video', tracker, { camera: true });
+      tracker.on('track', function(event) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        event.data.forEach(function(rect) {
+          context.strokeStyle = '#a64ceb';
+          context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+          context.font = '11px Helvetica';
+          context.fillStyle = "#fff";
+          context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+          context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+        });
+      });
+      var gui = new dat.GUI();
+      gui.add(tracker, 'edgesDensity', 0.1, 0.5).step(0.01);
+      gui.add(tracker, 'initialScale', 1.0, 10.0).step(0.1);
+      gui.add(tracker, 'stepSize', 1, 5).step(0.1);
+    };
+  </script>
+
+
+  <div>
+    <footer>Copyright &copy; Khalid & Mohamed 2018</footer>
+  </div>
+
+
+
+</body>
+</body>
+</html>
