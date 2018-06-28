@@ -1,6 +1,6 @@
 # online_face_detection_and_comparison_python
 
-In this project, I am using OpenCV in Python to start a video then detect faces and draw a square around the face.[Click here to see the same project using Opencv in Python.](https://github.com/Gharibim/online_face_detection_and_comparison)
+In this project, I am using OpenCV in Python to start a video then detect faces and draw a square around the face.[Click here to see the same project using JavaScript.](https://github.com/Gharibim/online_face_detection_and_comparison)
 
 <img src="monitor-0.png" width=500>
 Add and remove different face cascades for differece results
