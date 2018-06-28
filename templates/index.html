@@ -1,0 +1,205 @@
+{#<html>#}
+{#    <head>#}
+{#        <title>Video Streaming Demonstration</title>#}
+{#    </head>#}
+{#    <body>#}
+{#        <h1>Video Streaming Demonstration</h1>#}
+{#        <img id="myPic" src="{{ url_for('calc') }}" width="1000px">#}
+{#        <!-- <h1>{{ url_for('calc') }}</h1> -->#}
+{##}
+{#        <a href='/takeScreenshot' class='my_button_class'>ScreenShoot</a>#}
+{#        <a href='/checkImage' class='my_button_class'>Check Image</a>#}
+{#        <h1>results are {{ myResult }}</h1>#}
+{##}
+{##}
+{#    </body>#}
+{##}
+{#</html>#}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Face Detection</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="{{ url_for('static', filename='vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/freelancer.min.css') }}" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+
+
+
+
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      <div class="container" style="margin-bottom: 10px">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Face Detection</a>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+    <!-- Header -->
+    <header class="masthead bg-primary text-white text-center" >
+      <div class="container">
+
+
+        <img id="myPic" src="{{ url_for('calc') }}" class="img-fluid  mb-1  mx-auto" src="img/2C3E50.png" alt="" style="width:1000px;height:550px; margin-top: 10px">
+
+
+
+
+
+          <a href='/takeScreenshot' class="btn btn-danger">ScreenShoot</a>
+          <a href='/checkImage' class="btn btn-warning">Check Image</a>
+          <h1>results are {{ myResult }}</h1>
+
+{#        <button type="button" class="btn btn-default">Screenshot</button>#}
+{#        <button type="button" class="btn btn-warning">Screenshot</button>#}
+{#        <button type="button" class="btn btn-danger">Screenshot</button>#}
+        <h1 class="text-uppercase mb-0"></h1>
+        <h2 class="font-weight-light mb-0"></h2>
+
+      </div>
+
+    </header>
+
+    <!-- Portfolio Grid Section -->
+
+
+
+
+    <!-- About Section -->
+    <section class="bg-primary text-white mb-0" id="about">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-white mb-5">About</h2>
+        <hr class="star-light mb-5">
+        <div class="row">
+
+          <div class="col-lg-4 ml-auto">
+            <p class="lead" style="text-align: justify; direction: ltr">Face detection and comparission. In this project, you will be able to display a streaming video from your webcam, take a screenshot using a 'screenshot' button then compare the captured face to the criminals faces (in this project, the criminals faces are only Mohamed's face. Nothing else in the database). Then the result will let you know if the captured face is a criminal or not</p>
+          </div>
+          <div class="col-lg-4 mr-auto" style="text-align: justify; direction: ltr">
+            <p class="lead">This project is about capturing criminals faces through a streaming video camera then compare these faces to the criminals faces in the database. the results will be whether the captured face is a criminal or not! </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-5">Contact US</h2>
+        <hr class="star-dark mb-5">
+
+        <div class="col-lg-5 mr-auto">
+          <p class="lead">Mohamed Gharibi, iPhD in Data Science</p>
+          <p class="lead">mggvf@mail.umkc.edu</p>
+        </div>
+        <div class="col-lg-5 mr-auto">
+          <p class="lead">Khalid Almalki, iPhD in TCN</p>
+          <p class="lead">khaleds1991@gmail.com</p>
+
+        </div>
+        <div class="col-lg-4 mr-auto">
+          <p class="lead">Department of Computer Science</p>
+          <p class="lead">University of Missouri-Kansas City</p>
+        </div>
+        <div class="col-lg-4 mr-auto">
+          <p class="lead">Kansas City, Missouri</p>
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+
+
+    <!-- Footer -->
+
+
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <small>Copyright &copy; Hyatek 2018</small>
+      </div>
+    </div>
+
+
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-to-top d-lg-none position-fixed ">
+      <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+
+
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="{{ url_for('static', filename='js/jqBootstrapValidation.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/contact_me.js') }}"></script>
+
+    <!-- Custom scripts -->
+    <script src="{{ url_for('static', filename='js/freelancer.min.js') }}"></script>
+
+  </body>
+
+</html>
